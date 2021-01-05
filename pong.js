@@ -5,11 +5,11 @@
 Pong = {
 
   Defaults: {
-    width:        640,   // logical canvas width (browser will scale to physical canvas size - which is controlled by @media css queries)
-    height:       480,   // logical canvas height (browser will scale to physical canvas size - which is controlled by @media css queries)
-    wallWidth:    12,
-    paddleWidth:  12,
-    paddleHeight: 60,
+    width:        640,   // sets logical canvas width (browser will scale to physical canvas size - which is controlled by @media css queries)
+    height:       480,   // sets logical canvas height (browser will scale to physical canvas size - which is controlled by @media css queries)
+    wallWidth:    12,    // sets width of top and bottom walls, scoreboard, and dotted half-court line
+    paddleWidth:  12,    // sets width of player paddles
+    paddleHeight: 60,    // sets hieght of player paddles
     paddleSpeed:  2,     // starting vertical ball speed - cross court in approx 2 seconds
     ballSpeed:    4,     // starting horizontal ball speed - cross court in approx 4 seconds
     ballAccel:    8,     // sets rate that ball gradually increases speed until someone scores
@@ -17,7 +17,7 @@ Pong = {
     sound:        true
   },
 
-  // game color settings
+  // sets game colors
   Colors: {
     walls:           'white',
     ball:            'white',
@@ -27,10 +27,12 @@ Pong = {
     predictionExact: 'red'
   },
 
+  // sets game images
   Images: [
     "images/press1.png",
     "images/press2.png",
-    "images/winner.png"
+    "images/winner.png",
+    "images/OTECH.png"
   ],
 
   // AI difficulty level increases as player lead increases
@@ -154,7 +156,7 @@ Pong = {
       this.menu.draw(ctx);
   },
 
-  // executes on down press of key
+  // executes on down press of a key
   onkeydown: function(keyCode) {
     switch(keyCode) {
       case Game.KEY.ZERO: this.startDemo();            break;
@@ -168,7 +170,7 @@ Pong = {
     }
   },
 
-  // executes on release of key
+  // executes on release of a key
   onkeyup: function(keyCode) {
     switch(keyCode) {
       case Game.KEY.Q: if (!this.leftPaddle.auto)  this.leftPaddle.stopMovingUp();    break;
