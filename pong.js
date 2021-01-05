@@ -17,7 +17,7 @@ Pong = {
     sound:        true
   },
 
-  // sets game colors
+  // sets game colors : HTML color names - https://www.w3schools.com/colors/colors_names.asp
   Colors: {
     walls:           'white',
     ball:            'white',
@@ -31,8 +31,7 @@ Pong = {
   Images: [
     "images/press1.png",
     "images/press2.png",
-    "images/winner.png",
-    "images/OTECH.png"
+    "images/winner.png"
   ],
 
   // AI difficulty level increases as player lead increases
