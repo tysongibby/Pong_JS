@@ -5,18 +5,19 @@
 Pong = {
 
   Defaults: {
-    width:        640,   // logical canvas width (browser will scale to physical canvas size - which is controlled by @media css queries)
-    height:       480,   // logical canvas height (ditto)
-    wallWidth:    12,
-    paddleWidth:  12,
-    paddleHeight: 60,
-    paddleSpeed:  2,     // should be able to cross court vertically   in 2 seconds
-    ballSpeed:    4,     // should be able to cross court horizontally in 4 seconds, at starting speed ...
-    ballAccel:    8,     // ... but accelerate as time passes
-    ballRadius:   5,
+    width:        640,   // sets logical canvas width (browser will scale to physical canvas size - which is controlled by @media css queries)
+    height:       480,   // sets logical canvas height (browser will scale to physical canvas size - which is controlled by @media css queries)
+    wallWidth:    12,    // sets width of top and bottom walls, scoreboard, and dotted half-court line
+    paddleWidth:  12,    // sets width of player paddles
+    paddleHeight: 60,    // sets hieght of player paddles
+    paddleSpeed:  2,     // starting vertical ball speed - cross court in approx 2 seconds
+    ballSpeed:    4,     // starting horizontal ball speed - cross court in approx 4 seconds
+    ballAccel:    8,     // sets rate that ball gradually increases speed until someone scores
+    ballRadius:   5,     // ball size
     sound:        true
   },
 
+  // sets game colors : HTML color names - https://www.w3schools.com/colors/colors_names.asp
   Colors: {
     walls:           'white',
     ball:            'white',
@@ -26,12 +27,14 @@ Pong = {
     predictionExact: 'red'
   },
 
+  // sets game images
   Images: [
     "images/press1.png",
     "images/press2.png",
     "images/winner.png"
   ],
 
+  // AI difficulty level increases as player lead increases
   Levels: [
     {aiReaction: 0.2, aiError:  40}, // 0:  ai is losing by 8
     {aiReaction: 0.3, aiError:  50}, // 1:  ai is losing by 7
@@ -73,10 +76,12 @@ Pong = {
     }.bind(this));
   },
 
+  // set player mode
   startDemo:         function() { this.start(0); },
   startSinglePlayer: function() { this.start(1); },
   startDoublePlayer: function() { this.start(2); },
 
+  // start game
   start: function(numPlayers) {
     if (!this.playing) {
       this.scores = [0, 0];
@@ -88,6 +93,7 @@ Pong = {
     }
   },
 
+  // stop game
   stop: function(ask) {
     if (this.playing) {
       if (!ask || this.runner.confirm('Abandon game in progress ?')) {
@@ -103,6 +109,7 @@ Pong = {
     return 8 + (this.scores[playerNo] - this.scores[playerNo ? 0 : 1]);
   },
 
+  // goal is scored
   goal: function(playerNo) {
     this.sounds.goal();
     this.scores[playerNo] += 1;
@@ -148,6 +155,7 @@ Pong = {
       this.menu.draw(ctx);
   },
 
+  // executes on down press of a key
   onkeydown: function(keyCode) {
     switch(keyCode) {
       case Game.KEY.ZERO: this.startDemo();            break;
@@ -161,6 +169,7 @@ Pong = {
     }
   },
 
+  // executes on release of a key
   onkeyup: function(keyCode) {
     switch(keyCode) {
       case Game.KEY.Q: if (!this.leftPaddle.auto)  this.leftPaddle.stopMovingUp();    break;
@@ -192,7 +201,7 @@ Pong = {
     },
 
     declareWinner: function(playerNo) {
-      this.winner = playerNo;
+      this.winner = playerNo; 
     },
 
     draw: function(ctx) {
@@ -232,8 +241,8 @@ Pong = {
 
     ping: function() { this.play('ping'); },
     pong: function() { this.play('pong'); },
-    wall: function() { /*this.play('wall');*/ },
-    goal: function() { /*this.play('goal');*/ }
+    wall: function() { this.play('wall'); },
+    goal: function() { this.play('goal'); }
 
   },
 
